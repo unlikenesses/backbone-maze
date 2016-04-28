@@ -58,28 +58,27 @@ app.MazeView = Backbone.View.extend({
 	findPath: function() {
 		var self = this;
 
-	    // dequeue:
-		var oldestSquare = this.queue.pop();
+		while (self.queue.length > 0) {
 
-		var reachedPlayer = oldestSquare.get('x') == app.agentModel.get('x') && oldestSquare.get('y') == app.agentModel.get('y');
+		    // dequeue:
+			var oldestSquare = self.queue.pop();
 
-		if (! reachedPlayer) {
+			var reachedPlayer = oldestSquare.get('x') == app.agentModel.get('x') && oldestSquare.get('y') == app.agentModel.get('y');
 
-			var oldDistance = oldestSquare.get('distance');
-			var newDistance = oldDistance + 1;
+			if (! reachedPlayer) {
 
-			// enqueue adjacent steps:
-			var adjacentSquares = this.getAdjacent(oldestSquare.get('x'), oldestSquare.get('y'));
-			adjacentSquares.forEach(function(adjSq) {
-				var adjacentSquare = self.getSquareAt(adjSq.x, adjSq.y);
-				if (adjacentSquare.get('distance') == null) {
-					adjacentSquare.set('distance', newDistance);
-					self.queue.unshift(adjacentSquare);
-				}
-			});
+				var oldDistance = oldestSquare.get('distance');
+				var newDistance = oldDistance + 1;
 
-			if (self.queue.length > 0) {
-				this.findPath();
+				// enqueue adjacent steps:
+				var adjacentSquares = self.getAdjacent(oldestSquare.get('x'), oldestSquare.get('y'));
+				adjacentSquares.forEach(function(adjSq) {
+					var adjacentSquare = self.getSquareAt(adjSq.x, adjSq.y);
+					if (adjacentSquare.get('distance') == null) {
+						adjacentSquare.set('distance', newDistance);
+						self.queue.unshift(adjacentSquare);
+					}
+				});
 			}
 		}
 	},
