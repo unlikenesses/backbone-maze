@@ -58,10 +58,10 @@ app.MazeView = Backbone.View.extend({
 	findPath: function() {
 		var self = this;
 
-		while (self.queue.length > 0) {
+		while (this.queue.length > 0) {
 
 		    // dequeue:
-			var oldestSquare = self.queue.pop();
+			var oldestSquare = this.queue.pop();
 
 			var reachedPlayer = oldestSquare.get('x') == app.agentModel.get('x') && oldestSquare.get('y') == app.agentModel.get('y');
 
@@ -71,7 +71,7 @@ app.MazeView = Backbone.View.extend({
 				var newDistance = oldDistance + 1;
 
 				// enqueue adjacent steps:
-				var adjacentSquares = self.getAdjacent(oldestSquare.get('x'), oldestSquare.get('y'));
+				var adjacentSquares = this.getAdjacent(oldestSquare.get('x'), oldestSquare.get('y'));
 				adjacentSquares.forEach(function(adjSq) {
 					var adjacentSquare = self.getSquareAt(adjSq.x, adjSq.y);
 					if (adjacentSquare.get('distance') == null) {
