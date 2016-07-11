@@ -1,5 +1,11 @@
+body {
+	text-align: center;
+}
+
 #maze {
 	position: relative;
+	width: 500px;
+    margin: 0 auto;
 }
 
 .square {
@@ -42,4 +48,8 @@
 
 p.credits {
 	display: none;
+}
+
+#controls {
+  margin-bottom: 10px;
 }

@@ -63,9 +63,9 @@ app.MazeView = Backbone.View.extend({
 		    // dequeue:
 			var oldestSquare = this.queue.pop();
 
-			var reachedPlayer = oldestSquare.get('x') == app.agentModel.get('x') && oldestSquare.get('y') == app.agentModel.get('y');
+			var reachedAgent = oldestSquare.get('x') == app.agentModel.get('x') && oldestSquare.get('y') == app.agentModel.get('y');
 
-			if (! reachedPlayer) {
+			if (! reachedAgent) {
 
 				var oldDistance = oldestSquare.get('distance');
 				var newDistance = oldDistance + 1;
